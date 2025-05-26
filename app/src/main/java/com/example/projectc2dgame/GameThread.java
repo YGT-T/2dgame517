@@ -34,7 +34,7 @@ public class GameThread extends Thread {
             }
 
             try {
-                sleep(16); // Yaklaşık 33 FPS
+                sleep(16); // Yaklaşık 33 FPS..
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
