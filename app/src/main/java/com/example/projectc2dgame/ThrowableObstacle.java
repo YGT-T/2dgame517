@@ -8,7 +8,7 @@ import android.graphics.Rect;
 
 public class ThrowableObstacle {
     private Bitmap bitmap;
-    public static int x, y;
+    public int x, y;
     private int speed = +25;
     private boolean isRedirected = false;
     private int startX, startY;
@@ -66,12 +66,12 @@ public class ThrowableObstacle {
         this.t1 = 0;
     }
 
-    // Yeni metod: throwTo (redirectTo'nun alias'ı)
+
     public void throwTo(int targetX, int targetY) {
         redirectTo(targetX, targetY);
     }
 
-    // Yeni metod: getY()
+
     public int getY() {
         return y;
     }

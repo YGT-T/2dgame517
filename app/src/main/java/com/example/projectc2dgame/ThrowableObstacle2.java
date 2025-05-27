@@ -8,7 +8,7 @@ import android.graphics.Rect;
 
 public class ThrowableObstacle2 {
     private Bitmap bitmap;
-    public static int x, y;
+    public int x, y;
     private int speed = -25;
     private boolean isRedirected = false;
     private int startX, startY;

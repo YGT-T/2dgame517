@@ -348,20 +348,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             int x = (int) e.getX();
-            int width = getWidth();
+            int width = getWidth(); // Ekran genişliğini aldığınızı varsayıyorum
 
-            if (x > width / 2) {
+            if (x > width / 2) { // Ekranın sağına tıklandıysa cat1 saldırır
                 cat1.attackCount = 0;
                 cat1.isAttack = true;
-                if ((cat1.CatX) - (ThrowableObstacle.x) <= 300) {
-                    obstacleManager.throwFrontObstacle(cat1, cat2);
-                }
-            } else {
+                // Yakınlık kontrolünü ObstacleManager'a bırakıyoruz.
+                // O, fırlatılacak uygun bir engel varsa fırlatacaktır.
+                obstacleManager.throwFrontObstacle(cat1, cat2);
+            } else { // Ekranın soluna tıklandıysa cat2 saldırır
                 cat2.attackCount = 0;
                 cat2.isAttack = true;
-                if ((ThrowableObstacle2.x) - (cat2.CatX) <= 300) {
-                    obstacleManager.throwFrontObstacle(cat2, cat1);
-                }
+                // Yakınlık kontrolünü ObstacleManager'a bırakıyoruz.
+                obstacleManager.throwFrontObstacle(cat2, cat1);
             }
             return true;
         }
