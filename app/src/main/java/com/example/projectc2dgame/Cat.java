@@ -434,7 +434,7 @@ public class Cat {
 
             canvas.drawBitmap(hurtSpriteSheet, src, dst, null);
 
-        } else if (catLives==123) { // Özel ölüm
+        } else if (catLives==0) { // Özel ölüm
 
             canvas.drawBitmap(deadSpriteSheet, src, dst, null);
 
