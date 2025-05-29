@@ -28,13 +28,13 @@ public class Background {
 
     public Background(Bitmap bgImage, int bgXLeft, int bgXRight, int bgScrollSpeed) {
 
-        this.bgImage = bgImage; // Parametre olarak gelen bgImage değerini, bu sınıfa ait bgImage değişkenine atar. 'this' anahtar kelimesi, sınıfın kendi değişkenlerini işaret eder.
+        this.bgImage = bgImage;
 
-        this.bgXLeft = bgXLeft; // Parametre olarak gelen bgXLeft değerini, bu sınıfa ait bgXLeft değişkenine atar.
+        this.bgXLeft = bgXLeft;
 
-        this.bgXRight = bgXRight; // Parametre olarak gelen bgXRight değerini, bu sınıfa ait bgXRight değişkenine atar.
+        this.bgXRight = bgXRight;
 
-        this.bgScrollSpeed = bgScrollSpeed; // Parametre olarak gelen bgScrollSpeed değerini, bu sınıfa ait bgScrollSpeed değişkenine atar.
+        this.bgScrollSpeed = bgScrollSpeed;
 
     }
 
@@ -43,16 +43,16 @@ public class Background {
 
 
 
-
+//arka planın ekrandaki konumu günceller
     public void update() {
 
         bgXLeft -= bgScrollSpeed;
 
 
+        //eğer arkaplan ekranın dışına taştıysa konumunu sıfırlar
+        if (bgXLeft <= -bgImage.getWidth()) {
 
-        if (bgXLeft <= -bgImage.getWidth()) { // Eğer sol arka planın sol kenarı, ekranın solundan resim genişliği kadar dışarı taştıysa...
-
-            bgXLeft += bgImage.getWidth(); // ...sol arka planı, bir resim genişliği kadar sağa kaydırarak tekrar görünür alana getir.
+            bgXLeft += bgImage.getWidth();
 
         }
 
@@ -73,7 +73,7 @@ public class Background {
 
 
 
-
+        //güncellenen değerlere göre arkaplanı ekrana çizer
     public void drawScrollingBackgroundDual(Canvas canvas) {
 
         int bgWidth = bgImage.getWidth();
@@ -96,7 +96,7 @@ public class Background {
 
         canvas.drawBitmap(bgImage, bgXLeft + bgWidth, 0, null);
 
-        canvas.restore(); // Canvas'ı bir önceki kaydedilmiş durumuna geri yükler. Yani clipRect ile yapılan sınırlama kaldırılır.
+        canvas.restore(); // Canvası bir önceki kaydedilmiş durumuna geri yükler
 
 
 
@@ -104,7 +104,7 @@ public class Background {
 
         canvas.save(); // Canvas'ın mevcut durumunu tekrar kaydeder.
 
-        canvas.clipRect(halfWidth, 0, canvasWidth, canvasHeight); // Çizim yapılacak alanı ekranın sağ yarısıyla sınırlar.
+        canvas.clipRect(halfWidth, 0, canvasWidth, canvasHeight);
 
         canvas.drawBitmap(bgImage, bgXRight - bgWidth, 0, null);
 

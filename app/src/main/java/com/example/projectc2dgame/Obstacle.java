@@ -9,34 +9,34 @@ import android.graphics.Rect;
 
 
 public class Obstacle {
-    private Bitmap bitmap;   // Engel resmi
-    private int x, y;        // Engel pozisyonu
-    private int speed = 25;  // Sağ doğru hareket için pozitif hız
+    private Bitmap bitmap;
+    private int x, y;
+    private int speed = 25;
 
     public Obstacle(Context context, int startY) {
-        // Engel görselini yükle ve ölçeklendir
+
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.obstacle);
         bitmap = Bitmap.createScaledBitmap(bitmap, 120, 120, true);
 
-        // Engel ekranın ortasından başlar
+
         x = (Resources.getSystem().getDisplayMetrics().widthPixels) / 2;
 
-        // Y konumu dışarıdan parametre olarak atanır
+
         y = startY;
     }
 
-    // Engel sağa doğru hareket eder
+    // Engelin sağa doğru hareket etmesi için x+
     public void update() {
-        x += speed;  // sağa doğru
+        x += speed;
     }
 
-    // Engeli ekrana çiz
+
     public void draw(Canvas canvas) {
         canvas.drawBitmap(bitmap, x, y, null);
 
     }
 
-    // Engel pozisyonu için getter
+
     public int getX() {
         return x;
     }
@@ -45,7 +45,7 @@ public class Obstacle {
         return bitmap.getWidth();
     }
 
-    // Çarpışma için dikdörtgen alan
+    //Hitbox için
     public Rect getRect() {
         int padding = 10;
         return new Rect(
@@ -56,7 +56,7 @@ public class Obstacle {
         );
     }
 
-    // Kedi ile çarpışma kontrolü
+    //Kedi ile çarpışma anı için
     public boolean checkCollision(Cat cat) {
         return Rect.intersects(this.getRect(), cat.getRect());
     }

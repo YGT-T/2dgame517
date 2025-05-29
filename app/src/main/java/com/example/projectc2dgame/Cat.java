@@ -17,7 +17,7 @@ public class Cat {
 
 
 
-
+//karakterin konumu
     public int CatX;
 
     public int CatY;
@@ -25,7 +25,7 @@ public class Cat {
 
 
 
-
+//zıplama yol değiştirme
     public int jumpHeight;
 
     public int jumpSpeed;
@@ -42,7 +42,7 @@ public class Cat {
 
 
 
-
+//animasyon resimleri
 
     public Bitmap runSpriteSheet;
 
@@ -63,7 +63,7 @@ public class Cat {
 
 
 
-
+//resim boyutları
     public int runFrameWidth, runFrameHeight;
 
     public int jumpFrameWidth, jumpFrameHeight;
@@ -71,10 +71,12 @@ public class Cat {
 
 
 
-
+// update ve draw için her kare için değişimler
     public int frameDelay;
 
     public int currentRunFrame = 0; // Mevcut animasyon karesi
+
+    //resmin kaç parçaya bölüneceği akıcı animasyon için
 
     public int runFrameCount;
 
@@ -98,10 +100,10 @@ public class Cat {
 
     private float touchStartY = 0; // Dokunma başlangıç Y konumu
 
-    public int location = 0; // Kedinin mantıksal dikey konumu (örn: -1 üst, 0 orta, 1 alt)
+    public int location = 0; // Kedinin mantıksal dikey konumu (-1 alt, 0 orta, 1 üst)
 
-    public boolean isReversed; // Animasyon ters mi
-
+    public boolean isReversed; // Animasyon ters mi sağ ve sola aynı animasyonu koyabilmek için
+//hangi animasyonun kullanılcağını seçer
     public boolean isGameStart;
 
     public boolean isScare;
@@ -117,7 +119,7 @@ public class Cat {
 
 
 
-
+//animasyonun 1 kere çalışıp durması için
     public int scareCount;
 
     public int attackCount = 0;
@@ -190,11 +192,11 @@ public class Cat {
 
         this.startingFrameCount=startingFrameCount;
 
-// shieldFrameCount burada da atanmalı.
 
 
 
-// Kare boyutlarını hesapla (genişlik = toplam genişlik / kare sayısı)
+
+
 
         this.runFrameWidth = (runSpriteSheet.getWidth() / runFrameCount);
 
@@ -206,7 +208,7 @@ public class Cat {
 
 
 
-// Diğer değer atamaları
+
 
         this.jumpSpeed = jumpSpeed;
 
@@ -224,7 +226,7 @@ public class Cat {
 
 
 
-// Başlangıç pozisyonlarını hesapla
+
 
         int catWidth = runFrameWidth; // Kedi genişliği
 
@@ -280,7 +282,7 @@ public class Cat {
 
 
 
-// Zıplama/Düşme hareketlerini yönet
+// Zıplama/Düşme hareketleri
 
         if (isJumpingThrough) { // Özel zıplama (içinden geçme)
 
@@ -328,7 +330,7 @@ public class Cat {
 
         } else if (isFalling) {
 
-            if (jumpProgress < jumpHeight) { // Mesafeyi tamamlayana kadar
+            if (jumpProgress < jumpHeight) {
 
                 CatY += jumpSpeed;
 
@@ -398,7 +400,7 @@ public class Cat {
 
 
 
-// Kediyi ekrana çizer
+// karakteri update değerlerine göre ekrana çizer
 
     public void draw(Canvas canvas) {
 
@@ -413,7 +415,7 @@ public class Cat {
 
 
 
-
+// hangi animasyon çizilcek
         if (isGameStart) {
 
             canvas.drawBitmap(sleepSpriteSheet, src, dst, null);
@@ -456,7 +458,7 @@ public class Cat {
 
 
 
-// Dokunmatik ekran girdilerini yönetir
+// Dokunmatik ekran girdileri
 
     public boolean handleTouch(MotionEvent event) {
 
