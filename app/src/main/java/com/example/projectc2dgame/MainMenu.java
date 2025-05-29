@@ -44,25 +44,11 @@ public class MainMenu extends AppCompatActivity {
 
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
-            return insets;
-
-        });
 
 
 
-// MusicService'i burada başlatıyoruz. Bu, uygulamanın arka plan müziğini yönetecek.
 
-// Bu kod satırı sadece uygulamanın ilk açılışında çağrılsa iyi olur.
 
-// Eğer MainMenu her açıldığında servisi tekrar başlatmak istemiyorsanız,
-
-// bu mantığı uygulamanızın ilk Activity'sine (genellikle Launcher Activity'sine) taşıyın.
 
         Intent musicIntent = new Intent(this, MusicService.class);
 

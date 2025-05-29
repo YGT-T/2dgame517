@@ -13,7 +13,7 @@ public class ThrowableObstacle {
     private boolean isRedirected = false;
     private int startX, startY;
     private int targetX, targetY;
-    private int t1 = 0, t2 = 30; // 30 frame'lik parabol
+    private int t1 = 0, t2 = 30; // 30 frame'lik fırlatma
     private boolean shouldBeRemoved = false;
 
 
@@ -44,13 +44,13 @@ public class ThrowableObstacle {
                     2 * timeLeft * t1 * controlY +
                     t1 * t1 * targetY) / (t2 * t2);
 
-            // Hedefe ulaştıysa yok olmalı
+
             if (t1 >= t2) {
                 shouldBeRemoved = true;
             }
 
         } else {
-            x += speed; // normal sağa hareket
+            x += speed; //  sağa hareket için
         }
     }
     public boolean shouldBeRemoved() {

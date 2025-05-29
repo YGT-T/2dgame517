@@ -1,11 +1,9 @@
-package com.example.projectc2dgame; // Paket adı
-
+package com.example.projectc2dgame;
 
 
 import android.graphics.Canvas;
 
 import android.view.SurfaceHolder;
-
 
 
 public class GameThread extends Thread {
@@ -14,30 +12,18 @@ public class GameThread extends Thread {
 
     private GameView gameView;
 
-    private boolean running; // Oyun döngüsünün çalışıp çalışmadığını kontrol eder
-
-
-
-
-
+    private boolean running;
 
 
     public GameThread(SurfaceHolder holder, GameView view) {
 
-        super(); // Üst sınıf olan Thread'in yapıcı metodunu çağırır
+        super();
 
-        surfaceHolder = holder; // SurfaceHolder'ı atar
+        surfaceHolder = holder;
 
-        gameView = view; // GameView'ı atar
+        gameView = view;
 
     }
-
-
-
-
-
-
-
 
 
     public void setRunning(boolean isRunning) {
@@ -47,15 +33,13 @@ public class GameThread extends Thread {
     }
 
 
-
     @Override
 
-    public void run() { // Thread başlatıldığında bu metot çalışır
+    public void run() {
 
-        while (running) { // running true olduğu sürece döngü devam eder
+        while (running) {
 
             Canvas canvas = null;
-
 
 
             try {
@@ -63,7 +47,6 @@ public class GameThread extends Thread {
                 canvas = surfaceHolder.lockCanvas();
 
                 synchronized (surfaceHolder) {
-
 
 
                     if (gameView != null) {
@@ -80,23 +63,21 @@ public class GameThread extends Thread {
 
                 }
 
-            } finally { // Hata olsa da olmasa da bu blok çalışır
+            } finally {
 
-                if (canvas != null) { // Canvas null değilse (yani lockCanvas başarılı olduysa)
+                if (canvas != null) {
 
-                    surfaceHolder.unlockCanvasAndPost(canvas); // Canvas'ı serbest bırak ve çizilenleri ekranda göster
+                    surfaceHolder.unlockCanvasAndPost(canvas);
 
                 }
 
             }
 
 
-
             try {
 
-// Döngüyü kısa bir süre beklet FPS kontrolü için
 
-                sleep(16); // Yaklaşık 62.5 FPS (1000ms / 16ms). Oyunun saniyedeki kare hız
+                sleep(16); // 60 FPS için
 
             } catch (InterruptedException e) {
 

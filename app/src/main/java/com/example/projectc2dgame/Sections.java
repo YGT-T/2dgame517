@@ -82,15 +82,7 @@ public class Sections extends AppCompatActivity {
 
         setContentView(R.layout.activity_sections);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
 
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
-            return insets;
-
-        });
 
     }
 
@@ -110,7 +102,7 @@ public class Sections extends AppCompatActivity {
 
     public void goGamePanel(View view) {
 
-// Karakterlerin seçilip seçilmediğini kontrol edebilirsiniz.
+
 
         if (characterRunSprite == null || characterRunMirrorSprite == null) {
 

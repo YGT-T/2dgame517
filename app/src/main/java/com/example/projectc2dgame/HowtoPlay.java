@@ -8,7 +8,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
-import android.text.method.ScrollingMovementMethod; // Eklendi: Kaydırma için
+import android.text.method.ScrollingMovementMethod;
 
 import android.view.View;
 
@@ -58,15 +58,7 @@ public class HowtoPlay extends AppCompatActivity {
 
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
 
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
-            return insets;
-
-        });
 
     }
 

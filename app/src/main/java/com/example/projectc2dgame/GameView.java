@@ -1,4 +1,4 @@
-package com.example.projectc2dgame; // Paket adınız farklıysa bunu güncelleyin
+package com.example.projectc2dgame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,9 +15,9 @@ import android.app.Activity;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameThread thread;
-    private GestureDetector gestureDetector;
+    private GestureDetector gestureDetector;//gelişmiş dokunma hareketleri
     private boolean isPaused = false;
-    private boolean isGameOver = false; // Oyunun bitip bitmediğini kontrol eder
+    private boolean isGameOver = false;
 
     private ObstacleManager obstacleManager;
 
@@ -27,20 +27,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap bg_Image;
 
     private Bitmap heart_1, heart_2, heart_3;
-    // Dokunulmazlık zamanı değişkenleri kaldırıldı: cat1LastHitTime, cat2LastHitTime, INVULNERABILITY_TIME
-    // private long cat1LastHitTime = 0, cat2LastHitTime = 0;
-    // private static final long INVULNERABILITY_TIME = 200; // Bu satır kaldırıldı
+
 
     private Bitmap pauseButton;
     private int pauseButtonX, pauseButtonY, pauseButtonSize;
 
     private Bitmap resumeButton;
-    private int buttonWidth = 208; // resume ve restart butonları için ortak genişlik
-    private int buttonHeight = 64; // resume ve restart butonları için ortak yükseklik
+    private int buttonWidth = 208; // resume ve restart
+    private int buttonHeight = 64; // resume ve restart
     private int buttonSpacing = 86; // butonlar arası dikey boşluk
     private int resumeX, resumeY;
 
-    private Bitmap restartButton; // Yeniden başlatma butonu için Bitmap
+    private Bitmap restartButton;
     private int restartButtonX, restartButtonY; // Yeniden başlatma butonunun koordinatları
 
     public GameView(Context context) {
@@ -99,18 +97,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         resumeX = (screenWidth - buttonWidth) / 2;
         resumeY = (screenHeight - buttonHeight) / 2 - buttonSpacing / 2; // Ortalamak için biraz yukarı
 
-        // Yeniden Başlatma Butonu (Restart Button)
-        try {
-            restartButton = BitmapFactory.decodeResource(getResources(), R.drawable.restart_button);
-            restartButton = Bitmap.createScaledBitmap(restartButton, buttonWidth, buttonHeight, false);
-        } catch (Exception e) {
-            restartButton = null; // Resim bulunamazsa null ata, çizimde yazı kullanırız
-            System.err.println("Yeniden başlatma butonu resmi yüklenemedi: " + e.getMessage() + ". Metin olarak çizilecek.");
-        }
+        restartButton = BitmapFactory.decodeResource(getResources(), R.drawable.restart_button);
+        restartButton = Bitmap.createScaledBitmap(restartButton, buttonWidth, buttonHeight, false);
+
+
         restartButtonX = (screenWidth - buttonWidth) / 2;
         restartButtonY = resumeY + buttonHeight + buttonSpacing; // Resume butonunun altına yerleştir
 
-        initializeGameEntities(); // Oyun varlıklarını başlatan metod
+        initializeGameEntities();
 
         if (thread.getState() == Thread.State.NEW) {
             thread.setRunning(true);
@@ -141,7 +135,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 40, 280, 40, // spriteWidth, spriteHeight, an_idle_left_x_offset
                 false, true, false, true); // isPlayerOne, loopIdle, loopStart, isGameStartInitially
 
-        // cat2 (Sol oyuncu, isPlayerOne=true)
+        // cat2 (Sol oyuncu)
         cat2 = new Cat(getWidth(), getHeight(),
                 Sections.characterRunSprite,
                 Sections.characterJumpSprite,
@@ -159,10 +153,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         bg_1 = new Background(bg_Image, 0, 0, 15);
         obstacleManager = new ObstacleManager(getContext(), screenHeight, screenWidth);
 
-        // Oyun durumu değişkenlerini sıfırla
-        // Dokunulmazlık zamanı sıfırlamaları kaldırıldı
-        // cat1LastHitTime = 0;
-        // cat2LastHitTime = 0;
+
         isPaused = false;
         isGameOver = false;
     }
@@ -188,13 +179,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 boolean cat1HitByObstacle = obstacleManager.checkCollision(cat1);
                 boolean cat2HitByObstacle = obstacleManager.checkCollision(cat2);
 
-                // Dokunulmazlık kontrolü kaldırıldı, direkt can azaltma
+
                 if (cat1HitByObstacle) {
-                    if (!cat2.isShield) cat2.catLives--; // cat1'in engeli cat2'ye hasar verdi
+                    if (!cat2.isShield) cat2.catLives--;
                 }
 
                 if (cat2HitByObstacle) {
-                    if (!cat1.isShield) cat1.catLives--; // cat2'nin engeli cat1'e hasar verdi
+                    if (!cat1.isShield) cat1.catLives--;
                 }
 
                 // Canları kontrol et ve oyunu bitir
@@ -222,7 +213,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             bg_1.drawScrollingBackgroundDual(canvas);
         }
 
-        // Kediler
+
         cat1.draw(canvas);
         cat2.draw(canvas);
 
@@ -279,15 +270,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 canvas.drawText("WINNER!", canvas.getWidth() * 3 / 4, canvas.getHeight() / 3, winnerPaint);
             }
 
-            if (restartButton != null) {
-                canvas.drawBitmap(restartButton, restartButtonX, restartButtonY, null);
-            } else {
-                Paint restartTextPaint = new Paint();
-                restartTextPaint.setColor(Color.GREEN);
-                restartTextPaint.setTextSize(70);
-                restartTextPaint.setTextAlign(Paint.Align.CENTER);
-                canvas.drawText("RESTART", restartButtonX + (float)buttonWidth / 2, restartButtonY + (float)buttonHeight / 2 + 20, restartTextPaint);
-            }
+
+
+            canvas.drawBitmap(restartButton, restartButtonX, restartButtonY, null);
+
 
         } else if (isPaused) {
             Paint pausePaint = new Paint();

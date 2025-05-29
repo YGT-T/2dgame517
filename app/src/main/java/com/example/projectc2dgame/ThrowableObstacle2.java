@@ -13,7 +13,7 @@ public class ThrowableObstacle2 {
     private boolean isRedirected = false;
     private int startX, startY;
     private int targetX, targetY;
-    private int t1 = 0, t2 = 30; // 30 frame'lik parabol
+    private int t1 = 0, t2 = 30; // 30 frame'lik fırlatma
     private boolean shouldBeRemoved = false;
     public ThrowableObstacle2(Context context, int startX, int startY) {
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.throwable_obstacle2);
@@ -23,33 +23,33 @@ public class ThrowableObstacle2 {
         this.y = startY;
     }
 
-        public void update() {
-            if (isRedirected) {
-                t1++;
-                if (t1 > t2) t1 = t2;
+    public void update() {
+        if (isRedirected) {
+            t1++;
+            if (t1 > t2) t1 = t2;
 
-                int timeLeft = t2 - t1;
+            int timeLeft = t2 - t1;
 
-                int controlX = (startX + targetX) / 2;
-                int controlY = startY - 300; // Parabol tepe noktası
+            int controlX = (startX + targetX) / 2;
+            int controlY = startY - 300; // Parabol tepe noktası
 
-                x = (timeLeft * timeLeft * startX +
-                        2 * timeLeft * t1 * controlX +
-                        t1 * t1 * targetX) / (t2 * t2);
+            x = (timeLeft * timeLeft * startX +
+                    2 * timeLeft * t1 * controlX +
+                    t1 * t1 * targetX) / (t2 * t2);
 
-                y = (timeLeft * timeLeft * startY +
-                        2 * timeLeft * t1 * controlY +
-                        t1 * t1 * targetY) / (t2 * t2);
+            y = (timeLeft * timeLeft * startY +
+                    2 * timeLeft * t1 * controlY +
+                    t1 * t1 * targetY) / (t2 * t2);
 
-                // Hedefe ulaştıysa yok olmalı
-                if (t1 >= t2) {
-                    shouldBeRemoved = true;
-                }
 
-            } else {
-                x += speed; // normal sağa hareket
+            if (t1 >= t2) {
+                shouldBeRemoved = true;
             }
+
+        } else {
+            x += speed; //  sağa hareket için
         }
+    }
 
     public void redirectTo(int targetX, int targetY) {
         this.isRedirected = true;
