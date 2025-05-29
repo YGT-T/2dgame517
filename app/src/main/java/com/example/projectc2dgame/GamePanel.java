@@ -1,43 +1,57 @@
 package com.example.projectc2dgame;
 
-import android.content.Context;
-import android.content.Intent;
+
+
+
+
 import android.os.Bundle;
-import android.view.Display;
-import android.view.View;
-import android.view.WindowManager;
+
+
+
+
 
 import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.graphics.Insets;
+
 import androidx.core.view.ViewCompat;
+
 import androidx.core.view.WindowInsetsCompat;
+
+
 
 public class GamePanel extends AppCompatActivity {
 
+
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_game_panel);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
             return insets;
 
         });
 
         setContentView(new GameView(this));
+
     }
 
-/*    private void setFixedResolution(){
-        WindowManager mw=(WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        Display display =mw.getDefaultDisplay();
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.width=2400;
-        params.height=1080;
-        getWindow().setAttributes(params);
-    }
-*/
+
+
+
 
 }

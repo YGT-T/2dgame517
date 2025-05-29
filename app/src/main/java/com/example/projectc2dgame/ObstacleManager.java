@@ -24,8 +24,8 @@
         private long lastThrowableSpawnTime1;
         private long lastThrowableSpawnTime2;
 
-        private final long obstacleSpawnDelay1 = 1500;         // Normal engel 1 -> 2 saniye
-        private final long obstacleSpawnDelay2 = 1500;         // Normal engel 2 -> 3 saniye
+        private final long obstacleSpawnDelay1 = 1200;         // Normal engel 1 -> 2 saniye
+        private final long obstacleSpawnDelay2 = 1200;         // Normal engel 2 -> 3 saniye
         private final long throwableSpawnDelay1 = 5000;        // Fırlatılabilir engel 1 -> 4 saniye (daha uzun)
         private final long throwableSpawnDelay2 = 5000;        // Fırlatılabilir engel 2 -> 5 saniye (daha uzun)
 

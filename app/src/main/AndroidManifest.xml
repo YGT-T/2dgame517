@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-sdk android:minSdkVersion="22" android:targetSdkVersion="35" />
+
+    <uses-feature android:name="android.hardware.touchscreen" android:required="true" />
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="true" />
+
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,33 +18,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectC2Dgame"
-        tools:targetApi="31">
-
-        <service
-            android:name=".MusicService"
-            android:enabled="true"
-            android:exported="false" />
+        tools:targetApi="31"> <service
+        android:name=".MusicService"
+        android:enabled="true"
+        android:exported="false" />
 
         <activity
             android:name=".GamePanel"
             android:exported="false"
-            android:screenOrientation="landscape" /> <activity
-        android:name=".Sections"
-        android:exported="false"
-        android:screenOrientation="landscape" /> <activity
-        android:name=".HowtoPlay"
-        android:exported="false"
-        android:screenOrientation="landscape" /> <activity
-        android:name=".Options"
-        android:exported="false"
-        android:screenOrientation="landscape" /> <activity
-        android:name=".MainMenu"
-        android:exported="true"
-        android:screenOrientation="landscape"> <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-    </activity>
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Sections"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".HowtoPlay"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Options"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MainMenu"
+            android:exported="true"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
